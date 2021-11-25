@@ -1,0 +1,8 @@
+db.sqlite3
+employee/__pycache__/
+employee/settings/__pycache__/
+applications/__pycache__/
+applications/department/__pycache__
+applications/department/migrations/__pycache__
+applications/person/__pycache__
+applications/person/migrations/__pycache__
