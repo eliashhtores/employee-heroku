@@ -1,9 +1,7 @@
 from django.urls import path
+from . import views
 
-
-def fromPerson(self):
-    print('Hello from person')
 
 urlpatterns = [
-    path('person/', fromPerson),
+    path('person/', views.PersonView.as_view(), name='person'),
 ]

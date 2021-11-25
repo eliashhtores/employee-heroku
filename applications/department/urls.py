@@ -1,9 +1,7 @@
 from django.urls import path
+from . import views
 
-
-def fromDepartment(self):
-    print('Hello from department')
 
 urlpatterns = [
-    path('department/', fromDepartment),
+    path('department/', views.DepartmentView.as_view(), name='department'),
 ]
