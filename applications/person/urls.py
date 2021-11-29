@@ -3,5 +3,9 @@ from . import views
 
 
 urlpatterns = [
-    path('person/', views.PersonView.as_view(), name='person'),
+    path('person-all/', views.PersonListAll.as_view()),
+    path('person-list-by-department/<short_name>/', views.PersonListByDepartment.as_view()),
+    path('person-list-by-branch/<branch>/', views.PersonListByBranch.as_view()),
+    path('person-search/', views.PersonListByKeyword.as_view()),
+    path('person-by-skill/<id>', views.PersonBySkills.as_view()),
 ]

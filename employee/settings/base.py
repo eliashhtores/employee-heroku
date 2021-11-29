@@ -23,6 +23,8 @@ INSTALLED_APPS = [
     'applications.department',
     'applications.person',
     'applications.home',
+    # Third party libraries
+    'ckeditor',
 ]
 
 MIDDLEWARE = [

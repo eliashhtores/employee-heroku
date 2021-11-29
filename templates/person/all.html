@@ -7,6 +7,11 @@
         <title>Person</title>
     </head>
     <body>
-        Welcome to the Person page!
+        <h1>List all employees:</h1>
+        <ul>
+            {% for person in person_list %}
+            <li>{{person.first_name}} {{person.last_name}}</li>
+            {% endfor %}
+        </ul>
     </body>
 </html>
