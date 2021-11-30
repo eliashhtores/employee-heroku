@@ -1,4 +1,5 @@
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView, CreateView, TemplateView
+from django.urls import reverse_lazy
 from .models import Person
 
 
@@ -32,3 +33,18 @@ class PersonBySkills(ListView):
 
     def get_queryset(self):
         return Person.objects.get(id=self.kwargs['id']).skills.all()
+
+class PersonDetail(DetailView):
+    model = Person
+    template_name = 'person/detail.html'
+    context_object_name = 'employee'
+
+class SuccessView(TemplateView):
+    template_name = 'person/success.html'
+
+class PersonCreate(CreateView):
+    template_name = 'person/create.html'
+    model = Person
+    fields = ('__all__')
+    # success_url = '/person-all/'
+    success_url = reverse_lazy('person_app:success')
