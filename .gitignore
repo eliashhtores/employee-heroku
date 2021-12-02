@@ -1,5 +1,6 @@
 employee/__pycache__/
 employee/settings/__pycache__/
+employee/settings/local.py
 applications/__pycache__/
 applications/department/__pycache__
 applications/department/migrations/__pycache__
@@ -7,4 +8,3 @@ applications/person/__pycache__
 applications/person/migrations/__pycache__
 applications/home/__pycache__
 applications/home/migrations/__pycache__
-employee/settings/local.py
