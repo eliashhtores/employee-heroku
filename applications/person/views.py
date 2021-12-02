@@ -1,4 +1,4 @@
-from django.views.generic import ListView, DetailView, CreateView, TemplateView, UpdateView
+from django.views.generic import ListView, DetailView, CreateView, TemplateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from .models import Person
 
@@ -25,7 +25,9 @@ class PersonListByKeyword(ListView):
     template_name = 'person/by_keyword.html'
 
     def get_queryset(self):
-        return Person.objects.filter(first_name__icontains=self.request.GET.get('keyword', ' '))
+        if self.request.GET.get('keyword'):
+            return Person.objects.filter(first_name__icontains=self.request.GET.get('keyword'))
+        return
 
 class PersonBySkills(ListView):
     template_name = 'person/by_skills.html'
@@ -59,5 +61,20 @@ class PersonUpdate(UpdateView):
     template_name = 'person/update.html'
     model = Person
     fields = ('__all__')
-    success_url = '/person-all/'
-    # success_url = reverse_lazy('person_app:success')
+    success_url = reverse_lazy('person_app:all')
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        # print(request.POST)
+        return super().post(request, *args, **kwargs)
+
+    def form_valid(self, form):
+        """If the form is valid, save the associated model."""
+        self.object = form.save()
+        return super().form_valid(form)
+
+class PersonDelete(DeleteView):
+    model = Person
+    template_name = 'person/delete.html'
+    success_url = reverse_lazy('person_app:all')
+

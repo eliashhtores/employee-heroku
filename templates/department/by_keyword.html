@@ -4,20 +4,20 @@
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Person</title>
+        <title>Department</title>
     </head>
     <body>
-        <h1>Search for a person</h1>
+        <h1>Search for a department</h1>
         <form method="get">
             {% csrf_token %}
-            <input type="text" name="keyword" id="keyword" placeholder="Person name" />
+            <input type="text" name="keyword" id="keyword" placeholder="Department name" />
             <button type="submit">Search</button>
         </form>
         <br />
-        {% if person_list %} Results:
+        {% if department_list %} Results:
         <ul>
-            {% for person in person_list %}
-            <li>{{person.first_name}} {{person.last_name}}</li>
+            {% for department in department_list %}
+            <li>{{department.name}}</li>
             {% endfor %}
         </ul>
         {% endif %}
