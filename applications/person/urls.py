@@ -12,4 +12,5 @@ urlpatterns = [
     path('person-detail/<pk>', views.PersonDetail.as_view()),
     path('person-create/', views.PersonCreate.as_view()),
     path('person-success/', views.SuccessView.as_view(), name='success'),
+    path('person-update/<pk>', views.PersonUpdate.as_view()),
 ]

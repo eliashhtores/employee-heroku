@@ -1,4 +1,3 @@
-db.sqlite3
 employee/__pycache__/
 employee/settings/__pycache__/
 applications/__pycache__/
@@ -8,3 +7,4 @@ applications/person/__pycache__
 applications/person/migrations/__pycache__
 applications/home/__pycache__
 applications/home/migrations/__pycache__
+employee/settings/local.py

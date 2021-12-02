@@ -1,4 +1,4 @@
-from django.views.generic import ListView, DetailView, CreateView, TemplateView
+from django.views.generic import ListView, DetailView, CreateView, TemplateView, UpdateView
 from django.urls import reverse_lazy
 from .models import Person
 
@@ -48,3 +48,16 @@ class PersonCreate(CreateView):
     fields = ('__all__')
     # success_url = '/person-all/'
     success_url = reverse_lazy('person_app:success')
+
+    def form_valid(self, form):
+        person = form.save(commit=False)
+        person.email = person.first_name[0].lower() + '.' + person.last_name.lower() + '@test.com'
+        person.save()
+        return super(PersonCreate, self).form_valid(form)
+
+class PersonUpdate(UpdateView):
+    template_name = 'person/update.html'
+    model = Person
+    fields = ('__all__')
+    success_url = '/person-all/'
+    # success_url = reverse_lazy('person_app:success')
