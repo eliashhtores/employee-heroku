@@ -8,6 +8,9 @@
     </head>
     <body>
         <h1>Add home</h1>
-        {{ form }}
+        <form method="post">
+            {% csrf_token %} {{ form.as_p }}
+            <button type="submit">Add</button>
+        </form>
     </body>
 </html>

@@ -5,24 +5,26 @@ from django.views.generic import (
 )
 from .models import Home
 
+from .forms import HomeForm
+
 class HomeView(TemplateView):
-    template_name = 'home.html'
+    template_name = 'home/home.html'
 
 
 class HomeListView(ListView):
-    template_name = 'home_list.html'
+    template_name = 'home/home_list.html'
     context_object_name = 'numList'
     queryset = ['item1', 'item2', 'item3']
 
 
 class ListHome(ListView):
-    template_name = 'home_list_test.html'
+    template_name = 'home/home_list_test.html'
     model = Home
     context_object_name = 'homeList'
 
 
 class CreateHome(CreateView):
-    template_name = 'add.html'
+    template_name = 'home/add.html'
     model = Home
-    fields = ['title', 'description', 'quantity']
-    success_url = '/home_list_test'
+    form_class = HomeForm
+    success_url = '/home/list_test'
