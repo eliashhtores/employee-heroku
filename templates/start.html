@@ -1,0 +1,13 @@
+{% extends 'base.html' %} {% load static %} {% block title %} Employee App {% endblock %} {% block content %} {% include 'includes/header.html' %}
+<div class="container">
+    <div class="d-flex justify-content-center row-hl">
+        <div class="mt-5 item-hl">
+            <img class="mt-5 img-fluid" src="{% static 'img/start.png' %}" alt="First slide" />
+        </div>
+    </div>
+    <div class="d-flex mt-5 justify-content-center row-hl">
+        <h1>Welcome to the Employee register system</h1>
+    </div>
+    <div class="d-flex justify-content-center col-md-12">Welcome message</div>
+</div>
+{% endblock %}

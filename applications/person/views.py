@@ -78,3 +78,5 @@ class PersonDelete(DeleteView):
     template_name = 'person/delete.html'
     success_url = reverse_lazy('person_app:all')
 
+class StartView(TemplateView):
+    template_name = 'start.html'

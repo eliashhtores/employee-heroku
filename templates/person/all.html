@@ -1,17 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Person</title>
-    </head>
-    <body>
-        <h1>List all employees:</h1>
-        <ul>
-            {% for person in person_list %}
-            <li>{{person.first_name}} {{person.last_name}}</li>
-            {% endfor %}
-        </ul>
-    </body>
-</html>
+{% extends '../base.html' %} {% load static %} {% block title %} List all people {% endblock %} {% block content %}
+<h1>List all people:</h1>
+<ul>
+    {% for person in person_list %}
+    <li>{{person.first_name}} {{person.last_name}}</li>
+    {% endfor %}
+</ul>
+{% endblock %}

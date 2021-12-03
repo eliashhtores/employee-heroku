@@ -4,6 +4,7 @@ from . import views
 app_name = 'person_app'
 
 urlpatterns = [
+    path('', views.StartView.as_view()),
     path('person/all/', views.PersonListAll.as_view(), name='all'),
     path('person/list-by-department/<short_name>/', views.PersonListByDepartment.as_view()),
     path('person/list-by-branch/<branch>/', views.PersonListByBranch.as_view()),
