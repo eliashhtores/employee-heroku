@@ -1,6 +1,9 @@
 from django.views.generic import ListView, DetailView, CreateView, DeleteView, UpdateView
+from django.views.generic.edit import FormView
 from django.urls import reverse_lazy
 from .models import Department
+from .forms import NewDepartmentForm
+from applications.person.models import Person
 
 
 class DepartmentListAll(ListView):
@@ -36,3 +39,28 @@ class DepartmentDelete(DeleteView):
     template_name = 'department/delete.html'
     model = Department
     success_url = reverse_lazy('department_app:all')
+
+class NewDepartment(FormView):
+    template_name = 'department/new_department.html'
+    form_class = NewDepartmentForm
+    success_url = reverse_lazy('department_app:all')
+
+    def form_valid(self, form):
+        department = Department(
+            name = form.cleaned_data['name'],
+            short_name = form.cleaned_data['short_name']
+        )
+        department.save()
+        
+        first_name = form.cleaned_data['first_name']
+        last_name = form.cleaned_data['last_name']
+        job_title = form.cleaned_data['job_title']
+        Person.objects.create(
+            first_name=first_name, 
+            last_name=last_name, 
+            job_title=job_title,
+            branch='querétaro',
+            department=department,
+            email = first_name[0].lower() + '.' + last_name.lower() + '@test.com'
+        )
+        return super(NewDepartment, self).form_valid(form)
