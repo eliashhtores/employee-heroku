@@ -1,19 +1,32 @@
 from django.views.generic import ListView, DetailView, CreateView, TemplateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from .models import Person
+from django.db.models import Q
 
 
 class PersonListAll(ListView):
     template_name = 'person/all.html'
-    paginate_by = 10
-    ordering = ['first_name']
+    paginate_by = 5
     model = Person
+
+    def get_queryset(self):
+        keyword = self.request.GET.get('keyword', '')
+        return Person.objects.filter(Q(first_name__icontains=keyword) | Q(last_name__icontains=keyword)).order_by('first_name')
+
+class PersonAdmin(ListView):
+    template_name = 'person/admin.html'
+    paginate_by = 5
+    model = Person
+
+    def get_queryset(self):
+        keyword = self.request.GET.get('keyword', '')
+        return Person.objects.filter(Q(first_name__icontains=keyword) | Q(last_name__icontains=keyword)).order_by('first_name')
 
 class PersonListByDepartment(ListView):
     template_name = 'person/filtered.html'
 
     def get_queryset(self):
-        return Person.objects.filter(department__short_name__icontains=self.kwargs['short_name'])
+        return Person.objects.filter(department__id=self.kwargs['id']).order_by('first_name')
 
 class PersonListByBranch(ListView):
     template_name = 'person/filtered.html'
@@ -25,8 +38,10 @@ class PersonListByKeyword(ListView):
     template_name = 'person/by_keyword.html'
 
     def get_queryset(self):
-        if self.request.GET.get('keyword'):
-            return Person.objects.filter(first_name__icontains=self.request.GET.get('keyword'))
+        keyword = self.request.GET.get('keyword')
+        print(keyword)
+        if keyword:
+            return Person.objects.filter(Q(first_name__icontains=keyword) | Q(last_name__icontains=keyword))
         return
 
 class PersonBySkills(ListView):
@@ -39,7 +54,7 @@ class PersonBySkills(ListView):
 class PersonDetail(DetailView):
     model = Person
     template_name = 'person/detail.html'
-    context_object_name = 'employee'
+    context_object_name = 'person'
 
 class SuccessView(TemplateView):
     template_name = 'person/success.html'

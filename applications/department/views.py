@@ -4,19 +4,26 @@ from django.urls import reverse_lazy
 from .models import Department
 from .forms import NewDepartmentForm
 from applications.person.models import Person
+from django.db.models import Q
 
 
 class DepartmentListAll(ListView):
     template_name = 'department/all.html'
     ordering = ['name']
+    paginate_by = 5
     model = Department
+
+    def get_queryset(self):
+        keyword = self.request.GET.get('keyword', '')
+        return Department.objects.filter(Q(name__icontains=keyword) | Q(short_name__icontains=keyword)).order_by('name')
 
 class DepartmentListByKeyword(ListView):
     template_name = 'department/by_keyword.html'
 
     def get_queryset(self):
-        if self.request.GET.get('keyword'):
-            return Department.objects.filter(name__icontains=self.request.GET.get('keyword'))
+        keyword = self.request.GET.get('keyword')
+        if keyword:
+            return Department.objects.filter(Q(name__icontains=keyword) | Q(short_name__icontains=keyword))
         return
 
 class DepartmentDetail(DetailView):

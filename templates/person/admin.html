@@ -2,7 +2,7 @@
 
 <div class="container">
     <div class="row">
-        <h1>People</h1>
+        <h1>Admin People</h1>
     </div>
     <form method="get" class="row">
         {% csrf_token %}
@@ -24,6 +24,7 @@
                     <th scope="col">Department</th>
                     <th scope="col">Branch</th>
                     <th scope="col"></th>
+                    <th scope="col"></th>
                 </tr>
             </thead>
             <tbody>
@@ -35,7 +36,8 @@
                     <td>{{ person.job_title }}</td>
                     <td>{{ person.department }}</td>
                     <td>{{ person.branch }}</td>
-                    <td><a href="{% url 'person_app:detail' person.id %}" class="btn btn-dark">Detail</a></td>
+                    <td><a href="{% url 'person_app:detail' person.id %}" class="btn btn-success">Edit</a></td>
+                    <td><a href="{% url 'person_app:detail' person.id %}" class="btn btn-danger">Delete</a></td>
                 </tr>
                 {% endfor %}
             </tbody>

@@ -1,17 +1,39 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Department</title>
-    </head>
-    <body>
-        <h1>List all departments</h1>
-        <ul>
-            {% for department in department_list %}
-            <li>{{department.name}}</li>
-            {% endfor %}
-        </ul>
-    </body>
-</html>
+{% extends 'base.html' %} {% load static %} {% block title %} List all departments {% endblock %} {% block content %} {% include 'includes/header.html' %}
+<div class="container">
+    <div class="row">
+        <h1>Departments:</h1>
+    </div>
+    <form method="get" class="row">
+        {% csrf_token %}
+        <div class="col-md-4">
+            <input type="text" class="form-control" id="keyword" name="keyword" placeholder="Search department" aria-label="department" placeholderaria-describedby="basic-addon1" />
+        </div>
+        <div class="col-md-8">
+            <button type="submit" class="btn btn-success">Search</button>
+        </div>
+    </form>
+    <div class="row mt-4">
+        <table class="table table-striped">
+            <thead class="table-success">
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Short name</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for department in department_list %}
+                <tr>
+                    <th scope="row">{{ department.id }}</th>
+                    <td>{{ department.name }}</td>
+                    <td>{{ department.short_name }}</td>
+                    <td><a href="{% url 'person_app:list_by_department' department.id %}" class="btn btn-dark">View People</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% include '../includes/pagination.html' %}
+</div>
+{% endblock %}
