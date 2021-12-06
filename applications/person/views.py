@@ -5,7 +5,7 @@ from .models import Person
 
 class PersonListAll(ListView):
     template_name = 'person/all.html'
-    paginate_by = 4
+    paginate_by = 10
     ordering = ['first_name']
     model = Person
 

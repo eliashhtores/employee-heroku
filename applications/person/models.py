@@ -15,13 +15,10 @@ class Skill(models.Model):
 
 
 class Person(models.Model):
-    QRO = 'querétaro'
-    CDMX = 'cdmx'
-    CELAYA = 'Celaya'
     BRANCH_CHOICES = (
-        (QRO, 'Querétaro'),
-        (CDMX, 'CDMX'),
-        (CELAYA, 'Celaya'),
+        ('Querétaro', 'Querétaro'),
+        ('CDMX', 'CDMX'),
+        ('Celaya', 'Celaya'),
     )
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
@@ -39,4 +36,4 @@ class Person(models.Model):
         verbose_name = ('Persona')
 
     def __str__(self):
-        return self.first_name + ' ' +  self.last_name
+        return self.first_name + ' ' + self.last_name
