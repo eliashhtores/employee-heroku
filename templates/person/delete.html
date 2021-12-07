@@ -2,11 +2,13 @@
 {%include 'includes/header.html' %}
 
 <div class="container">
-    <form action="" method="post">
+    <form method="post">
         {% csrf_token %}
-        <h3>Are you sure you want to delete this person?</h3>
-        <a href="{% url 'person_app:admin' %}" class="btn btn-success">Go back</a>
-        <button type="submit" class="btn btn-danger">Confirm</button>
+        <h3>Are you sure you want to delete {{ object }}?</h3>
+        <div class="container">
+            <a href="{% url 'person_app:admin' %}" class="btn btn-success">Go back</a>
+            <button type="submit" class="btn btn-danger">Confirm</button>
+        </div>
     </form>
 </div>
 {% endblock %}

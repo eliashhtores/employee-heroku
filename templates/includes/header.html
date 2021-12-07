@@ -16,10 +16,13 @@
                 <li class="nav-item">
                     <a class="nav-link active" href="{% url 'person_app:admin' %}">Admin</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="{% url 'department_app:new_department' %}">New Department</a>
+                </li>
             </ul>
             <form class="d-flex">
                 <!-- <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" /> -->
-                <a href="{% url 'person_app:create' %}" class="btn btn-light">Add new</a>
+                <a href="{% url 'person_app:create' %}" class="btn btn-light">Add new person</a>
             </form>
         </div>
     </div>

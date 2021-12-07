@@ -27,8 +27,9 @@ class Person(models.Model):
     department = models.ForeignKey(Department, on_delete=models.CASCADE)
     skills = models.ManyToManyField(Skill)
     email = models.EmailField(max_length=254, blank=True)
+    image = models.ImageField(
+        max_length=100, upload_to='images/', null=True, blank=True)
     resume = RichTextField(default='', null=True, blank=True)
-    # image = models.ImageField(max_length=100, upload_to='images/', null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

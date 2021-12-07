@@ -72,7 +72,7 @@ class NewDepartment(FormView):
             first_name=first_name,
             last_name=last_name,
             job_title=job_title,
-            branch='querétaro',
+            branch='Querétaro',
             department=department,
             email=first_name[0].lower() + '.' + last_name.lower() + '@test.com'
         )

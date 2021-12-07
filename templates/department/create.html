@@ -1,16 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Department</title>
-    </head>
-    <body>
-        <h1>Add department</h1>
-        <form method="post">
-            {% csrf_token %} {{ form.as_p }}
-            <input type="submit" value="Add" />
-        </form>
-    </body>
-</html>
+{% extends 'base.html' %} {% load static %} {% block title %} Add department {% endblock %} {% block content %}
+{% load crispy_forms_tags %}
+{% include 'includes/header.html' %}
+
+<div class="container">
+    <h1>Add department</h1>
+    <form method="post" class="form-control">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-md-6">
+                {{ form.name|as_crispy_field }}
+            </div>
+            <div class="col-md-6">
+                {{ form.short_name|as_crispy_field }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                {{ form.active|as_crispy_field }}
+            </div>
+        </div>
+        <div class="d-flex justify-content-center">
+            <input type="submit" class="btn btn-success" value="Add" />
+        </div>
+    </form>
+</div>
+
+{% endblock %}

@@ -1,12 +1,13 @@
 from django.views.generic import ListView, DetailView, CreateView, TemplateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from .models import Person
+from .forms import PersonForm
 from django.db.models import Q
 
 
 class PersonListAll(ListView):
     template_name = 'person/all.html'
-    paginate_by = 5
+    paginate_by = 10
     model = Person
 
     def get_queryset(self):
@@ -16,7 +17,7 @@ class PersonListAll(ListView):
 
 class PersonAdmin(ListView):
     template_name = 'person/admin.html'
-    paginate_by = 5
+    paginate_by = 10
     model = Person
 
     def get_queryset(self):
@@ -60,7 +61,6 @@ class PersonBySkills(ListView):
 class PersonDetail(DetailView):
     model = Person
     template_name = 'person/detail.html'
-    context_object_name = 'person'
 
 
 class SuccessView(TemplateView):
@@ -70,9 +70,8 @@ class SuccessView(TemplateView):
 class PersonCreate(CreateView):
     template_name = 'person/create.html'
     model = Person
-    fields = ('__all__')
-    # success_url = '/person-all/'
-    success_url = reverse_lazy('person_app:success')
+    form_class = PersonForm
+    success_url = reverse_lazy('person_app:all')
 
     def form_valid(self, form):
         person = form.save(commit=False)
@@ -85,7 +84,7 @@ class PersonCreate(CreateView):
 class PersonUpdate(UpdateView):
     template_name = 'person/update.html'
     model = Person
-    fields = ('__all__')
+    form_class = PersonForm
     success_url = reverse_lazy('person_app:admin')
 
     def post(self, request, *args, **kwargs):

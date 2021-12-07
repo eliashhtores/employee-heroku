@@ -1,15 +1,33 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Person</title>
-    </head>
-    <body>
-        <p>{{ person.first_name }}</p>
-        <p>{{ person.last_name }}</p>
-        <p>{{ person.department }}</p>
+{% extends 'base.html' %} {% load static %} {% block title %} {{ person }} {% endblock %} {% block content %}
+{% load crispy_forms_tags %}
+{% include 'includes/header.html' %}
+
+<div class="container mt-5 d-flex justify-content-center">
+    <!-- <div class="row">
         <p>{{ person.skills }}</p>
-    </body>
-</html>
+    </div> -->
+
+    <div class="card col-4">
+        <div class="card-body">
+            <h4 class="card-title">{{ person }}</h4>
+            {% if person.image %}
+            <img src="{{ person.image.url }}" class="card-img-bottom img-fluid">
+            {% else %}
+            <img src="{% static 'img/default.png' %}" class="card-img-bottom img-fluid">
+            {% endif %}
+            <h5>{{ person.job_title }}</h5>
+            <p class="card-text">{{ person.department.short_name }}</p>
+            <p class="card-text">{{ person.get_branch_display }}</p>
+            <p class="card-text">{{ person.email }}</p>
+            <label>Skills:</label>
+            <ul class="list-group mb-5">
+                {% for skill in person.skills.all %}
+                <li class="list-group-item list-group-item-success mb-1">{{ skill }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}
