@@ -13,6 +13,7 @@ class PersonListAll(ListView):
         keyword = self.request.GET.get('keyword', '')
         return Person.objects.filter(Q(first_name__icontains=keyword) | Q(last_name__icontains=keyword)).order_by('first_name')
 
+
 class PersonAdmin(ListView):
     template_name = 'person/admin.html'
     paginate_by = 5
@@ -22,17 +23,20 @@ class PersonAdmin(ListView):
         keyword = self.request.GET.get('keyword', '')
         return Person.objects.filter(Q(first_name__icontains=keyword) | Q(last_name__icontains=keyword)).order_by('first_name')
 
+
 class PersonListByDepartment(ListView):
     template_name = 'person/filtered.html'
 
     def get_queryset(self):
         return Person.objects.filter(department__id=self.kwargs['id']).order_by('first_name')
 
+
 class PersonListByBranch(ListView):
     template_name = 'person/filtered.html'
 
     def get_queryset(self):
         return Person.objects.filter(branch__icontains=self.kwargs['branch'])
+
 
 class PersonListByKeyword(ListView):
     template_name = 'person/by_keyword.html'
@@ -44,6 +48,7 @@ class PersonListByKeyword(ListView):
             return Person.objects.filter(Q(first_name__icontains=keyword) | Q(last_name__icontains=keyword))
         return
 
+
 class PersonBySkills(ListView):
     template_name = 'person/by_skills.html'
     context_object_name = 'skills'
@@ -51,13 +56,16 @@ class PersonBySkills(ListView):
     def get_queryset(self):
         return Person.objects.get(id=self.kwargs['id']).skills.all()
 
+
 class PersonDetail(DetailView):
     model = Person
     template_name = 'person/detail.html'
     context_object_name = 'person'
 
+
 class SuccessView(TemplateView):
     template_name = 'person/success.html'
+
 
 class PersonCreate(CreateView):
     template_name = 'person/create.html'
@@ -68,15 +76,17 @@ class PersonCreate(CreateView):
 
     def form_valid(self, form):
         person = form.save(commit=False)
-        person.email = person.first_name[0].lower() + '.' + person.last_name.lower() + '@test.com'
+        person.email = person.first_name[0].lower(
+        ) + '.' + person.last_name.lower() + '@test.com'
         person.save()
         return super(PersonCreate, self).form_valid(form)
+
 
 class PersonUpdate(UpdateView):
     template_name = 'person/update.html'
     model = Person
     fields = ('__all__')
-    success_url = reverse_lazy('person_app:all')
+    success_url = reverse_lazy('person_app:admin')
 
     def post(self, request, *args, **kwargs):
         self.object = self.get_object()
@@ -88,10 +98,12 @@ class PersonUpdate(UpdateView):
         self.object = form.save()
         return super().form_valid(form)
 
+
 class PersonDelete(DeleteView):
     model = Person
     template_name = 'person/delete.html'
-    success_url = reverse_lazy('person_app:all')
+    success_url = reverse_lazy('person_app:admin')
+
 
 class StartView(TemplateView):
     template_name = 'start.html'

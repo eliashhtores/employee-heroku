@@ -1,12 +1,14 @@
-{% extends 'base.html' %} {% load static %} {% block title %} List all departments {% endblock %} {% block content %} {% include 'includes/header.html' %}
+{% extends 'base.html' %} {% load static %} {% block title %} List all departments {% endblock %} {% block content %}
+{%include 'includes/header.html' %}
 <div class="container">
     <div class="row">
-        <h1>Departments:</h1>
+        <h1>Departments</h1>
     </div>
     <form method="get" class="row">
         {% csrf_token %}
         <div class="col-md-4">
-            <input type="text" class="form-control" id="keyword" name="keyword" placeholder="Search department" aria-label="department" placeholderaria-describedby="basic-addon1" />
+            <input type="text" class="form-control" id="keyword" name="keyword" placeholder="Search department"
+                aria-label="department" aria-describedby="basic-addon1" />
         </div>
         <div class="col-md-8">
             <button type="submit" class="btn btn-success">Search</button>
@@ -28,7 +30,8 @@
                     <th scope="row">{{ department.id }}</th>
                     <td>{{ department.name }}</td>
                     <td>{{ department.short_name }}</td>
-                    <td><a href="{% url 'person_app:list_by_department' department.id %}" class="btn btn-dark">View People</a></td>
+                    <td><a href="{% url 'person_app:list_by_department' department.id %}" class="btn btn-dark">View
+                            People</a></td>
                 </tr>
                 {% endfor %}
             </tbody>
