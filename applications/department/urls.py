@@ -8,7 +8,7 @@ urlpatterns = [
     path('department/search/', views.DepartmentListByKeyword.as_view()),
     path('department/detail/<pk>', views.DepartmentDetail.as_view(), name='detail'),
     path('department/create/', views.DepartmentCreate.as_view()),
-    path('department/update/<pk>', views.DepartmentUpdate.as_view()),
+    path('department/update/<pk>', views.DepartmentUpdate.as_view(), name='update'),
     path('department/delete/<pk>', views.DepartmentDelete.as_view()),
     path('department/new-department/',
          views.NewDepartment.as_view(), name='new_department'),

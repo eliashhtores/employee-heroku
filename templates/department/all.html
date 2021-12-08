@@ -22,6 +22,7 @@
                     <th scope="col">Name</th>
                     <th scope="col">Short name</th>
                     <th scope="col"></th>
+                    <th scope="col"></th>
                 </tr>
             </thead>
             <tbody>
@@ -30,6 +31,7 @@
                     <th scope="row">{{ department.id }}</th>
                     <td>{{ department.name }}</td>
                     <td>{{ department.short_name }}</td>
+                    <td><a href="{% url 'department_app:update' department.id %}" class="btn btn-success">Edit</a></td>
                     <td><a href="{% url 'person_app:list_by_department' department.id %}" class="btn btn-dark">View
                             People</a></td>
                 </tr>
