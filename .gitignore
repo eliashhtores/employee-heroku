@@ -9,3 +9,4 @@ applications/person/migrations/__pycache__
 applications/home/__pycache__
 applications/home/migrations/__pycache__
 images/
+credentials.txt
