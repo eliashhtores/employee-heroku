@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 import os
+import dj_database_url
 from unipath import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -82,16 +83,10 @@ WSGI_APPLICATION = 'employee.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'd1neo1uks4d8cb',
-        'USER': 'orgsjjeletjvmf',
-        'PASSWORD': '35eb107ad4ba8fa4a76031f90c7891d04748065cf9341d52508597db9810f723',
-        'HOST': 'ec2-54-198-213-75.compute-1.amazonaws.com',
-        'PORT': '5432',
-    }
-}
+DATABASES = {'default': {}}
+
+db_from_env = dj_database_url.config(conn_max_age=500)
+DATABASES['default'].update(db_from_env)
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = ['static']
