@@ -10,5 +10,3 @@ applications/home/__pycache__
 applications/home/migrations/__pycache__
 images/
 credentials.txt
-employee/settings/prod.py
-requirements.txt
